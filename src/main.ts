@@ -20,7 +20,9 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
+      //이 옵션을 true 시키면 dto에 정의되지 않은 프로퍼티를 body에 넘길시 property 'xxx' should not exist라는 에러가 뜨게 됩니다
       forbidNonWhitelisted: true,
+      //nest에서는 이런 불필요한 과정을 생략하기 위해 transform이라는 옵션을 만들었습니다
       transform: true,
     }),
   );

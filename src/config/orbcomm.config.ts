@@ -2,7 +2,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { LoggerOptions } from 'typeorm';
 
-export default class TypeOrmConfig {
+export default class OrbcommOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
     return {
       type: 'postgres',
@@ -20,6 +20,6 @@ export default class TypeOrmConfig {
 
 export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
-  useFactory: async (configService: ConfigService): Promise<TypeOrmModuleOptions> => TypeOrmConfig.getOrmConfig(configService),
+  useFactory: async (configService: ConfigService): Promise<TypeOrmModuleOptions> => OrbcommOrmConfig.getOrmConfig(configService),
   inject: [ConfigService],
 };

@@ -1,26 +1,47 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
 
+// controller에서 요청된 데이터를 가공하여 DTO를 통해 디비에 접근하여 CRUD를 실행
 @Injectable()
-export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+export class UserService {
+  private users: User[] = [];
+
+  getAll(): User[] {
+    return this.users;
   }
 
-  findAll() {
-    return `This action returns all users`;
+  getOne(id: number): User {
+    const user = this.users.find((user) => user.id === Number(id));
+    if (!user) {
+      // 클라이언트는 error.message에 user id ${id} not found이 값이 들어갑니다. status-code는 nest가 정해준 값으로 들어갑니다
+      throw new NotFoundException(`user id ${id} not found`);
+    }
+    return user;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  deleteOne(id: number): boolean {
+    this.getOne(id);
+    this.users = this.users.filter((user) => user.id !== Number(id));
+    return true;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  create(userData: CreateUserDto) {
+    this.users.push({
+      imageLink: '',
+      async hashPassword(): Promise<void> {
+        return Promise.resolve(undefined);
+      },
+      id: this.users.length + 1,
+      ...userData,
+    });
+    console.log('success');
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+  // update(id: number, updateData: UpdateUserDto) {
+  //   const user = this.getOne(id);
+  //   this.deleteOne(id);
+  //   this.users.push({ ...user, ...updateData });
+  // }
 }
