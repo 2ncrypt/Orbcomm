@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfigAsync } from './config/orbcomm.config';
+import * as process from 'process';
 
 const envFile =
   process.env.NODE_ENV === 'production' ? '.production.env' : process.env.NODE_ENV === 'development' ? '.development.env' : '.development.env';

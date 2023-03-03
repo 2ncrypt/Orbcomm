@@ -1,8 +1,8 @@
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import * as argon2 from 'argon2';
 
-@Entity('user')
-export class User {
+@Entity('users')
+export class Users {
   //Primary Key 설정 Decorate
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,7 +22,4 @@ export class User {
   async hashPassword() {
     this.password = await argon2.hash(this.password);
   }
-
-  @Column({ default: '' })
-  imageLink: string;
 }

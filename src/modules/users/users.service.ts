@@ -1,47 +1,42 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
+import { Users } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 // controller에서 요청된 데이터를 가공하여 DTO를 통해 디비에 접근하여 CRUD를 실행
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectRepository(Users)
+    private usersRepository: Repository<Users>,
   ) {}
 
-  async getAll(): Promise<User[]> {
+  async getAll(): Promise<Users[]> {
     return this.usersRepository.find();
   }
-  // getOne(id: number): User {
-  //   const user = this.users.find((user) => user.id === Number(id));
-  //   if (!user) {
-  //     // 클라이언트는 error.message에 user id ${id} not found이 값이 들어갑니다. status-code는 nest가 정해준 값으로 들어갑니다
-  //     throw new NotFoundException(`user id ${id} not found`);
-  //   }
-  //   return user;
-  // }
-  //
-  // deleteOne(id: number): boolean {
-  //   this.getOne(id);
-  //   this.users = this.users.filter((user) => user.id !== Number(id));
-  //   return true;
-  // }
-  //
-  // create(userData: CreateUserDto) {
-  //   this.users.push({
-  //     imageLink: '',
-  //     async hashPassword(): Promise<void> {
-  //       return Promise.resolve(undefined);
-  //     },
-  //     id: this.users.length + 1,
-  //     ...userData,
-  //   });
-  //   console.log('success');
-  // }
+  async getOne(id: number): Promise<Users> {
+    const users = await this.usersRepository.find();
+    console.log('Retest ', users);
+    const user = users.find((user) => user.id === Number(id));
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+    return user;
+  }
+
+  async deleteOne(id: number): Promise<boolean> {
+    const user = await this.getOne(id);
+    await this.usersRepository.remove(user);
+    return true;
+  }
+
+  async create(userData: CreateUserDto) {
+    const user = this.usersRepository.create(userData);
+    await this.usersRepository.save(user);
+    console.log('success');
+  }
 
   // update(id: number, updateData: UpdateUserDto) {
   //   const user = this.getOne(id);
