@@ -1,11 +1,13 @@
-import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
 import { UserService } from './users.service';
 import { UserController } from './users.controller';
+import { Module } from '@nestjs/common';
 
-//User폴더 내에 있는  resource들을 이용하기 위한 중심부
 @Module({
-  controllers: [UserController],
+  imports: [TypeOrmModule.forFeature([User])],
   providers: [UserService],
+  controllers: [UserController],
   exports: [UserService],
 })
 export class UsersModule {}
