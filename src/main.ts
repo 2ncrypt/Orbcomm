@@ -16,6 +16,7 @@ async function bootstrap() {
   SwaggerModule.setup('/docs', app, document);
 
   app.useGlobalFilters(new HttpExceptionFilter());
+  /* enableCors ,useGlobalPipes 추가 할 수 있는 기능 확인 */
   app.enableCors(); //Cors 활성화
   app.useGlobalPipes(
     new ValidationPipe({

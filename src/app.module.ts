@@ -20,6 +20,8 @@ const envFile =
       validationSchema: validation,
     }),
     TypeOrmModule.forRootAsync(typeOrmConfigAsync),
+    //Modules Folder in users.moudule.ts import 해야 users 사용가능
+    //Modules import 자리 ,
     UsersModule,
   ],
   providers: [AppService],
