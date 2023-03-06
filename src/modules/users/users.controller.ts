@@ -28,8 +28,8 @@ export class UsersController {
     return this.userService.deleteOne(userId);
   }
 
-  // @Patch('/:id')
-  // patch(@Param('id') userId: number, @Body() updateData: UpdateUserDto) {
-  //   return this.userService.update(userId, updateData);
-  // }
+  @Patch('/:id')
+  patch(@Param('id') userId: number, @Body() updateData: UpdateUserDto) {
+    return this.userService.update(userId, updateData);
+  }
 }

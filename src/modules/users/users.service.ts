@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Users } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Cron } from '@nestjs/schedule';
 
 // controller에서 요청된 데이터를 가공하여 DTO를 통해 디비에 접근하여 CRUD를 실행
 @Injectable()
@@ -18,7 +19,7 @@ export class UsersService {
   }
   async getOne(id: number): Promise<Users> {
     const users = await this.usersRepository.find();
-    console.log('Retest ', users);
+    console.log('Retest ');
     const user = users.find((user) => user.id === Number(id));
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
@@ -38,9 +39,14 @@ export class UsersService {
     console.log('success');
   }
 
-  // update(id: number, updateData: UpdateUserDto) {
-  //   const user = this.getOne(id);
-  //   this.deleteOne(id);
-  //   this.users.push({ ...user, ...updateData });
-  // }
+  async update(id: number, updateData: UpdateUserDto) {
+    const user = this.getOne(id);
+    await this.deleteOne(id);
+    await this.usersRepository.save({ ...user, ...updateData });
+  }
+  @Cron('*/30 * * * * *') // 매 초마다 실행
+  handleCron() {
+    // const test = this.usersRepository.find();
+    console.log(`Current time is  ${new Date().toLocaleTimeString()}`);
+  }
 }
