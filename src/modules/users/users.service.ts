@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Users } from './entities/user.entity';
+import { Users } from './entities/users.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cron } from '@nestjs/schedule';
@@ -19,7 +19,6 @@ export class UsersService {
   }
   async getOne(id: number): Promise<Users> {
     const users = await this.usersRepository.find();
-    console.log('Retest ');
     const user = users.find((user) => user.id === Number(id));
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
@@ -44,9 +43,13 @@ export class UsersService {
     await this.deleteOne(id);
     await this.usersRepository.save({ ...user, ...updateData });
   }
+
+  //Users Scheduler Test
   @Cron('*/30 * * * * *') // 매 초마다 실행
-  handleCron() {
-    // const test = this.usersRepository.find();
-    console.log(`Current time is  ${new Date().toLocaleTimeString()}`);
+  async handleCron() {
+    const users = await this.usersRepository.find({ select: ['username'] });
+    const testUserNumber = await this.getOne(6);
+    console.log('UserName Scheduler', users, testUserNumber);
+    console.log(`Current time is ${new Date().toLocaleTimeString()}`);
   }
 }

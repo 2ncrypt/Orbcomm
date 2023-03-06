@@ -1,7 +1,7 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { LoggerOptions } from 'typeorm';
-import { Users } from '../modules/users/entities/user.entity';
+import { Users } from '../modules/users/entities/users.entity';
 
 export default class OrbcommOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {

@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfigAsync } from './config/orbcomm.config';
+import { OrbcommModule } from './modules/orbcomm/orbcomm.module';
 import * as process from 'process';
 
 const envFile =
@@ -23,6 +24,7 @@ const envFile =
     //Modules Folder in users.moudule.ts import 해야 users 사용가능
     //Modules import 자리 ,
     UsersModule,
+    OrbcommModule,
   ],
   providers: [AppService],
 })

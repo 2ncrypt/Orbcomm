@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getTest(): string {
-    return 'Hello NestJS World!';
+  getMain(): { link: string; main: any } {
+    return { link: '/docs', main: 'Go Swagger' };
   }
 }
