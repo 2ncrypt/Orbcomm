@@ -33,6 +33,7 @@ export class UsersService {
   }
 
   async create(userData: CreateUserDto) {
+    console.log('userData ', userData, 'CreateUser', CreateUserDto);
     const user = this.usersRepository.create(userData);
     await this.usersRepository.save(user);
     console.log('success');
@@ -45,11 +46,11 @@ export class UsersService {
   }
 
   //Users Scheduler Test
-  @Cron('*/30 * * * * *') // 매 초마다 실행
-  async handleCron() {
-    const users = await this.usersRepository.find({ select: ['username'] });
-    const testUserNumber = await this.getOne(6);
-    console.log('UserName Scheduler', users, testUserNumber);
-    console.log(`Current time is ${new Date().toLocaleTimeString()}`);
-  }
+  // @Cron('*/30 * * * * *') // 매 초마다 실행
+  // async handleCron() {
+  //   const users = await this.usersRepository.find({ select: ['username'] });
+  //   const testUserNumber = await this.getOne(6);
+  //   console.log('UserName Scheduler', users, testUserNumber);
+  //   console.log(`Current time is ${new Date().toLocaleTimeString()}`);
+  // }
 }

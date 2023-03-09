@@ -1,14 +1,40 @@
 import { Module } from '@nestjs/common';
-import { OrbcommService } from './orbcomm.service';
+import { OrbcommScheduler } from './orbcomm.service';
 import { OrbcommController } from './orbcomm.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Orbcomm, OrbcommAsset } from './entities/orbcomm.entity';
+import {
+  OrbAsset,
+  OrbAssetStatus,
+  OrbGenericSensor,
+  OrbImpactStatus,
+  OrbPositionStatus,
+  OrbPretripStatus,
+  OrbReeferStatus,
+} from './entities/orbAsset.entity';
 import { ScheduleModule } from '@nestjs/schedule';
+import { HttpModule } from '@nestjs/axios';
+import { OrbcommAPI } from './orbcommAPI.service';
+import { OrbTest, TestDto } from './entities/orbTest.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Orbcomm, OrbcommAsset]), ScheduleModule.forRoot()],
+  //AxiosModule = httpmodule
+  imports: [
+    TypeOrmModule.forFeature([
+      OrbAsset,
+      OrbAssetStatus,
+      OrbPositionStatus,
+      OrbReeferStatus,
+      OrbGenericSensor,
+      OrbPretripStatus,
+      OrbImpactStatus,
+      OrbTest,
+      TestDto,
+    ]),
+    ScheduleModule.forRoot(),
+    HttpModule,
+  ],
   controllers: [OrbcommController],
-  providers: [OrbcommService],
-  exports: [OrbcommService],
+  providers: [OrbcommScheduler, OrbcommAPI],
+  exports: [OrbcommScheduler, OrbcommAPI],
 })
 export class OrbcommModule {}

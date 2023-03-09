@@ -10,15 +10,15 @@ export class Users {
   id: number;
   //https://typeorm.io/entities#column-options
   //TypeORM 옵션들
-  @Column({ length: 32 })
+  @Column({ length: 32, nullable: true })
   @ApiProperty({ description: '유저 이름' })
   username: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   @ApiProperty({ description: '이메일' })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   @ApiProperty({ description: '패스워드' })
   password: string;
 

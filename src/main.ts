@@ -10,11 +10,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const PORT = configService.get('SERVER_PORT');
-  const config = new DocumentBuilder().setTitle('API Documentation').setDescription('API Documentation').setVersion('1.0').build();
+  const swaggerConfig = new DocumentBuilder().setTitle('API Documentation').setDescription('API Documentation').setVersion('1.0').build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/docs', app, document);
-
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  if (configService.get('NODE_ENV') === 'development') {
+    SwaggerModule.setup('/docs', app, document);
+  }
+  //예외처리 부분
   app.useGlobalFilters(new HttpExceptionFilter());
   /* enableCors ,useGlobalPipes 추가 할 수 있는 기능 확인 */
   app.enableCors(); //Cors 활성화
