@@ -29,7 +29,8 @@ export class CreateOrbTestDto {
   @IsOptional()
   commandStatus?: string;
 
-  @OneToOne(() => TestDto, { cascade: true })
-  @JoinColumn()
-  test: TestDto;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => TestDto)
+  readonly test?: TestDto;
 }

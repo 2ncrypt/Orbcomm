@@ -1,14 +1,18 @@
 import { IsArray, IsBoolean, IsDate, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Optional } from '@nestjs/common';
-
+//OrbAssetCreateDto Main Class
 export class OrbAssetStatusCreateDto {
+  @IsOptional()
+  @IsString()
+  readonly assetName: string;
+
   @IsOptional()
   @IsString()
   readonly assetType: string;
 
   @IsOptional()
-  readonly messageId: number;
+  readonly messageId: string;
 
   @IsOptional()
   @IsDate()
@@ -89,15 +93,11 @@ export class OrbAssetStatusCreateDto {
   @IsOptional()
   @IsString()
   readonly latestAssetNotes: string;
-
-  constructor(partial: Partial<OrbAssetStatusCreateDto>) {
-    Object.assign(this, partial);
-  }
 }
 
-export class CreateOrbPositionStatusDTO {
+export class OrbPositionStatusCreateDTO {
   @IsNumber()
-  readonly messageId: number;
+  readonly messageId: string;
 
   @IsString()
   readonly city: string;
@@ -179,14 +179,10 @@ export class CreateOrbPositionStatusDTO {
 
   @IsString()
   readonly address: string;
-
-  constructor(partial: Partial<CreateOrbPositionStatusDTO>) {
-    Object.assign(this, partial);
-  }
 }
 export class OrbReeferStatusCreateDto {
   @IsOptional()
-  readonly messageId: number;
+  readonly messageId: string;
 
   @IsString()
   readonly reeferState: string;
@@ -376,7 +372,7 @@ export class OrbReeferStatusCreateDto {
 
   @IsOptional()
   @IsNumber()
-  readonly eventSeverity?: number;
+  readonly eventSeverity?: string;
 
   @IsOptional()
   @IsNumber()
@@ -535,14 +531,10 @@ export class OrbReeferStatusCreateDto {
 
   @IsNumber()
   readonly otherSensorData: number;
-
-  constructor(partial: Partial<OrbReeferStatusCreateDto>) {
-    Object.assign(this, partial);
-  }
 }
 export class OrbGenericSensorCreateDto {
   @IsNumber()
-  readonly messageId: number;
+  readonly messageId: string;
 
   @IsOptional()
   @IsString()
@@ -587,15 +579,11 @@ export class OrbGenericSensorCreateDto {
   @IsOptional()
   @IsObject()
   readonly voltageSensorDataSensors?: object;
-
-  constructor(partial: Partial<OrbGenericSensorCreateDto>) {
-    Object.assign(this, partial);
-  }
 }
 
 export class OrbPretripStatusCreateDTO {
   @IsNumber()
-  readonly messageId: number;
+  readonly messageId: string;
 
   @IsString()
   readonly pretripResult: string;
@@ -611,15 +599,11 @@ export class OrbPretripStatusCreateDTO {
 
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => PretripResultCreateDTO)
-  readonly pretripResults: PretripResultCreateDTO[];
-
-  constructor(partial: Partial<OrbPretripStatusCreateDTO>) {
-    Object.assign(this, partial);
-  }
+  @Type(() => OrbPretripResultCreateDTO)
+  readonly pretripResults: OrbPretripResultCreateDTO[];
 }
 //OrbPretripStatusCreateDTO의 내부 클래스
-export class PretripResultCreateDTO {
+export class OrbPretripResultCreateDTO {
   @IsString()
   readonly testCode: string;
 
@@ -628,7 +612,7 @@ export class PretripResultCreateDTO {
 }
 export class OrbImpactStatusCreateDto {
   @IsNumber()
-  readonly messageId: number;
+  readonly messageId: string;
 
   @IsString()
   @IsOptional()
@@ -661,13 +645,9 @@ export class OrbImpactStatusCreateDto {
   @IsNumber()
   @IsOptional()
   readonly deltav: number;
-
-  constructor(partial: Partial<OrbImpactStatusCreateDto>) {
-    Object.assign(this, partial);
-  }
 }
 
-export class CreateOrbAssetDto {
+export class OrbAssetCreateDto {
   @IsNotEmpty()
   @IsString()
   readonly messageId: string;
@@ -684,21 +664,33 @@ export class CreateOrbAssetDto {
   @IsOptional()
   commandStatus?: string;
 
+  @IsOptional()
+  @ValidateNested()
   @Type(() => OrbAssetStatusCreateDto)
-  readonly assetStatus: OrbAssetStatusCreateDto;
+  readonly assetStatus?: OrbAssetStatusCreateDto;
 
-  @Type(() => CreateOrbPositionStatusDTO)
-  readonly positionStatus: CreateOrbPositionStatusDTO;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => OrbPositionStatusCreateDTO)
+  readonly positionStatus?: OrbPositionStatusCreateDTO;
 
+  @IsOptional()
+  @ValidateNested()
   @Type(() => OrbReeferStatusCreateDto)
-  readonly reeferStatus: OrbReeferStatusCreateDto;
+  readonly reeferStatus?: OrbReeferStatusCreateDto;
 
+  @IsOptional()
+  @ValidateNested()
   @Type(() => OrbGenericSensorCreateDto)
-  readonly genericSensors: OrbGenericSensorCreateDto;
+  readonly genericSensors?: OrbGenericSensorCreateDto;
 
+  @IsOptional()
+  @ValidateNested()
   @Type(() => OrbPretripStatusCreateDTO)
-  readonly pretripStatus: OrbPretripStatusCreateDTO;
+  readonly pretripStatus?: OrbPretripStatusCreateDTO;
 
+  @IsOptional()
+  @ValidateNested()
   @Type(() => OrbImpactStatusCreateDto)
-  readonly impactStatus: OrbImpactStatusCreateDto;
+  readonly impactStatus?: OrbImpactStatusCreateDto;
 }

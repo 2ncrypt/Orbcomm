@@ -10,7 +10,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const PORT = configService.get('SERVER_PORT');
-  const swaggerConfig = new DocumentBuilder().setTitle('API Documentation').setDescription('API Documentation').setVersion('1.0').build();
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('API Documentation')
+    .setDescription('API Documentation')
+    .setVersion('1.0')
+    .addTag('')
+    // .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT', name: 'JWT', description: 'Enter JWT Token', in: 'header' }, 'accesskey')
+    .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   if (configService.get('NODE_ENV') === 'development') {

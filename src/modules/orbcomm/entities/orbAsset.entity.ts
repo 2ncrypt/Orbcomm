@@ -1,9 +1,12 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IsNotEmpty } from 'class-validator';
 
 @Entity('orbAsset')
 export class OrbAsset {
   @PrimaryGeneratedColumn()
   id: number;
+  @Column({ nullable: false })
+  assetName: string;
   @Column({ nullable: false })
   messageId: string;
   @Column({ nullable: true })
@@ -13,37 +16,23 @@ export class OrbAsset {
   doorStatus: string | null;
   @Column({ type: 'varchar', nullable: true })
   commandStatus: string | null;
-
-  @OneToOne(() => OrbAssetStatus, (assetStatus) => assetStatus.messageId)
-  assetStatus: OrbAssetStatus[];
-
-  @OneToOne(() => OrbPositionStatus, (positionStatus) => positionStatus.messageId)
-  positionStatus: OrbPositionStatus[];
-  @OneToOne(() => OrbReeferStatus, (reeferStatus) => reeferStatus.messageId)
-  reeferStatus: OrbReeferStatus[];
-  @OneToOne(() => OrbGenericSensor, (genericSensors) => genericSensors.messageId)
-  genericSensors: OrbGenericSensor[];
-
-  @OneToOne(() => OrbPretripStatus, (pretripStatus) => pretripStatus.messageId)
-  pretripStatus: OrbPretripStatus[];
-  @OneToOne(() => OrbImpactStatus, (impactStatus) => impactStatus.messageId)
-  impactStatus: OrbImpactStatus[];
 }
 @Entity('orbAssetStatus')
 export class OrbAssetStatus {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => OrbAsset, (orbAsset) => orbAsset.messageId)
-  messageId: OrbAsset;
+  @IsNotEmpty()
+  @Column({ nullable: false })
+  messageId: string;
 
   @Column({ nullable: true })
   assetType: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   messageStamp: Date;
 
-  @Column({ nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   messageReceivedStamp: Date;
 
   @Column({ nullable: true })
@@ -106,9 +95,9 @@ export class OrbPositionStatus {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => OrbAsset, (orbAsset) => orbAsset.messageId)
-  messageId: OrbAsset;
-
+  @IsNotEmpty()
+  @Column({ nullable: false })
+  messageId: string;
   @Column()
   city: string;
 
@@ -187,8 +176,9 @@ export class OrbReeferStatus {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => OrbAsset, (orbAsset) => orbAsset.messageId)
-  messageId: OrbAsset;
+  @IsNotEmpty()
+  @Column({ nullable: false })
+  messageId: string;
 
   @Column()
   reeferState: string;
@@ -522,8 +512,9 @@ export class OrbGenericSensor {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => OrbAsset, (orbAsset) => orbAsset.messageId)
-  messageId: OrbAsset;
+  @IsNotEmpty()
+  @Column({ nullable: false })
+  messageId: string;
 
   @Column({ nullable: true })
   doorSensorData: string;
@@ -564,8 +555,9 @@ export class OrbPretripStatus {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => OrbAsset, (orbAsset) => orbAsset.messageId)
-  messageId: OrbAsset;
+  @IsNotEmpty()
+  @Column({ nullable: false })
+  messageId: string;
 
   @Column({ nullable: true })
   pretripResult: string;
@@ -591,8 +583,9 @@ export class OrbImpactStatus {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => OrbAsset, (orbAsset) => orbAsset.messageId)
-  messageId: OrbAsset;
+  @IsNotEmpty()
+  @Column({ nullable: false })
+  messageId: string;
 
   @Column({ nullable: true })
   moving: string;

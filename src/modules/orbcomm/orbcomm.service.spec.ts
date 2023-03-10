@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { OrbcommService } from './orbcomm.service';
+import { OrbcommService } from './service/orbcommScheduler.service';
 
 describe('OrbcommService', () => {
   let service: OrbcommService;

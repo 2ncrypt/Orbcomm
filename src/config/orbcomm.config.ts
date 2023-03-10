@@ -13,6 +13,7 @@ import {
 } from '../modules/orbcomm/entities/orbAsset.entity';
 import { OrbTest } from '../modules/orbcomm/entities/orbTest.entity';
 import { TestDto } from '../modules/orbcomm/entities/orbTest.entity';
+import { orbAuthToken } from '../modules/orbcomm/entities/orbAuth.entity';
 
 export default class OrbcommOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
@@ -34,6 +35,7 @@ export default class OrbcommOrmConfig {
         OrbImpactStatus,
         OrbTest,
         TestDto,
+        orbAuthToken,
       ],
       synchronize: configService.get<boolean>('TYPEORM_SYNCHRONIZE') || false,
       logging: true,

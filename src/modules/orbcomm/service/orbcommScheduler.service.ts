@@ -1,17 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOrbAssetDto } from './dto/orbAsset/create-orbAsset.dto';
-import { UpdateOrbAssetDto } from './dto/orbAsset/update-orbAsset.dto';
-import { OrbcommAPI } from './orbcommAPI.service';
-import { Cron } from '@nestjs/schedule';
+import { OrbDataApi } from './orbcommDataApi.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { OrbAsset } from './entities/orbAsset.entity';
+import { OrbAsset } from '../entities/orbAsset.entity';
+
 //TypeScript에서는 와일드카드를 이용한 파일 선택 방법은 제공하지 않음
 
 @Injectable()
-export class OrbcommScheduler {
+export class OrbScheduler {
   constructor(
-    private readonly OrbcommAPI: OrbcommAPI,
+    private readonly OrbcommAPI: OrbDataApi,
     @InjectRepository(OrbAsset)
     private readonly orbAssetRepository: Repository<OrbAsset>,
   ) {}

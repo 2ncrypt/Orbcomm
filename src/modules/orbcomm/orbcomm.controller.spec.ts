@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { OrbcommController } from './orbcomm.controller';
-import { OrbcommScheduler } from './orbcomm.service';
-import { OrbcommAPI } from './orbcommAPI.service';
+import { OrbScheduler } from './service/orbcommScheduler.service';
+import { OrbDataApi } from './service/orbcommDataApi.service';
 
 describe('OrbcommController', () => {
   let controller: OrbcommController;
@@ -9,7 +9,7 @@ describe('OrbcommController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OrbcommController],
-      providers: [OrbcommScheduler, OrbcommAPI],
+      providers: [OrbScheduler, OrbDataApi],
     }).compile();
 
     controller = module.get<OrbcommController>(OrbcommController);

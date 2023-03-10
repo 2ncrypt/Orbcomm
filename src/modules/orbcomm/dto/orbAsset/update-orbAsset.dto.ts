@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/swagger';
-import { CreateOrbAssetDto } from './create-orbAsset.dto';
+import { OrbAssetCreateDto } from './create-orbAsset.dto';
 
-export class UpdateOrbAssetDto extends PartialType(CreateOrbAssetDto) {}
+export class UpdateOrbAssetDto extends PartialType(OrbAssetCreateDto) {}
