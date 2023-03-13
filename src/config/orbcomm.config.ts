@@ -3,7 +3,7 @@ import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm
 import { LoggerOptions } from 'typeorm';
 import { Users } from '../modules/users/entities/users.entity';
 import {
-  OrbAsset,
+  OrbAssetStatusMng,
   OrbAssetStatus,
   OrbGenericSensor,
   OrbImpactStatus,
@@ -26,7 +26,7 @@ export default class OrbcommOrmConfig {
       database: configService.get('DB_NAME'),
       entities: [
         Users,
-        OrbAsset,
+        OrbAssetStatusMng,
         OrbAssetStatus,
         OrbPositionStatus,
         OrbReeferStatus,

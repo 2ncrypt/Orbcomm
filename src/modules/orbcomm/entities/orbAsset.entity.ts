@@ -1,12 +1,10 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
 
-@Entity('orbAsset')
-export class OrbAsset {
+@Entity('orbAssetStatusMng')
+export class OrbAssetStatusMng {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({ nullable: false })
-  assetName: string;
   @Column({ nullable: false })
   messageId: string;
   @Column({ nullable: true })
@@ -25,15 +23,17 @@ export class OrbAssetStatus {
   @IsNotEmpty()
   @Column({ nullable: false })
   messageId: string;
+  @Column({ nullable: true })
+  assetName: string;
 
   @Column({ nullable: true })
   assetType: string;
 
-  @Column({ type: 'timestamp', nullable: true })
-  messageStamp: Date;
+  @Column({ nullable: true })
+  messageStamp: string;
 
-  @Column({ type: 'timestamp', nullable: true })
-  messageReceivedStamp: Date;
+  @Column({ nullable: true })
+  messageReceivedStamp: string;
 
   @Column({ nullable: true })
   deviceSN: string;
@@ -45,7 +45,7 @@ export class OrbAssetStatus {
   productType: string;
 
   @Column({ nullable: true })
-  batteryVoltage: number;
+  batteryVoltage: boolean;
 
   @Column({ nullable: true })
   batteryStatus: string;
@@ -113,20 +113,20 @@ export class OrbPositionStatus {
   @Column()
   country: string;
 
-  @Column()
+  @Column({ nullable: true })
   geofenceName: string;
 
-  @Column()
+  @Column({ nullable: true })
   geofenceType: string;
 
   @Column('json', { nullable: true })
   geofenceDetails: any;
 
-  @Column()
-  latitude: number;
+  @Column({ type: 'float', nullable: true })
+  latitude: any;
 
-  @Column()
-  longitude: number;
+  @Column({ type: 'float', nullable: true })
+  longitude: any;
 
   @Column()
   direction: string;
@@ -137,20 +137,20 @@ export class OrbPositionStatus {
   @Column({ nullable: true })
   batteryAlertText: string;
 
-  @Column()
+  @Column({ nullable: true })
   dwell: number;
 
   @Column({ nullable: true })
   dwellTimeOutside: number;
 
-  @Column()
+  @Column({ nullable: true })
   geofenceStatus: string;
 
   @Column({ nullable: true })
   pmAlertText: string;
 
-  @Column()
-  arrivalTime: Date;
+  @Column({ nullable: true })
+  arrivalTime: string;
 
   @Column({ nullable: true })
   nearestGeofence: string;
@@ -161,13 +161,13 @@ export class OrbPositionStatus {
   @Column({ nullable: true })
   pmHours: number;
 
-  @Column()
-  priorDepartureTime: Date;
+  @Column({ nullable: true })
+  priorDepartureTime: string;
 
-  @Column()
+  @Column({ nullable: true })
   priorDepartureLocation: string;
 
-  @Column()
+  @Column({ nullable: true })
   address: string;
 }
 
@@ -179,332 +179,332 @@ export class OrbReeferStatus {
   @IsNotEmpty()
   @Column({ nullable: false })
   messageId: string;
-
-  @Column()
-  reeferState: string;
-
-  @Column()
-  reeferState2: string;
-
-  @Column()
-  reeferState3: string;
-
-  @Column()
-  hookStatus: string;
-
-  @Column()
-  onTrip: boolean;
-
-  @Column()
-  controllerType: string;
-
-  @Column()
-  operationMode: string;
-
-  @Column()
-  intelliset: string;
-
-  @Column()
-  intellisetCode: string;
-
-  @Column()
-  optisetCode: string;
-
-  @Column()
-  optisetDesc: string;
-
-  @Column()
-  controlSensor: string;
-
-  @Column()
-  fuelLevel: number;
-
-  @Column()
-  fuelPercent: number;
-
-  @Column()
-  fuelFlow: number;
-
-  @Column()
-  initialFuel: number;
-
-  @Column()
-  finalFuel: number;
-
-  @Column()
-  engineHours: number;
-
-  @Column()
-  switchOnHours: number;
-
-  @Column()
-  engineRPM: number;
+  //
+  // @Column()
+  // reeferState: string;
+  //
+  // @Column()
+  // reeferState2: string;
+  //
+  // @Column()
+  // reeferState3: string;
+  //
+  // @Column()
+  // hookStatus: string;
+  //
+  // @Column()
+  // onTrip: boolean;
+  //
+  // @Column()
+  // controllerType: string;
+  //
+  // @Column()
+  // operationMode: string;
+  //
+  // @Column()
+  // intelliset: string;
+  //
+  // @Column()
+  // intellisetCode: string;
+  //
+  // @Column()
+  // optisetCode: string;
+  //
+  // @Column()
+  // optisetDesc: string;
+  //
+  // @Column()
+  // controlSensor: string;
+  //
+  // @Column()
+  // fuelLevel: number;
+  //
+  // @Column()
+  // fuelPercent: number;
+  //
+  // @Column()
+  // fuelFlow: number;
+  //
+  // @Column()
+  // initialFuel: number;
+  //
+  // @Column()
+  // finalFuel: number;
+  //
+  // @Column()
+  // engineHours: number;
+  //
+  // @Column()
+  // switchOnHours: number;
+  //
+  // @Column()
+  // engineRPM: number;
 
   @Column()
   commPlatform: string;
-
-  @Column()
-  ftaStatusText: string;
-
-  @Column()
-  ftaStatus2Text: string;
-
-  @Column()
-  ftaStatus3Text: string;
-
-  @Column()
-  fsmaDocCount: number;
-
-  @Column()
-  fuelAlertText: string;
-
-  @Column()
-  microComm: string;
-
-  @Column()
-  activeAlarms: string;
-
-  @Column()
-  standByHours: number;
-
-  @Column()
-  ambientTemp: number;
-
-  @Column()
-  reeferPowerDesc: string;
-
-  @Column()
-  setpointTemp: number;
-
-  @Column()
-  returnTemp: number;
-
-  @Column()
-  dischargeTemp: number;
-
-  @Column()
-  reeferPower2Desc: string;
-
-  @Column()
-  setpointTemp2: number;
-
-  @Column()
-  returnTemp2: number;
-
-  @Column()
-  dischargeTemp2: number;
-
-  @Column()
-  reeferPower3Desc: string;
-
-  @Column()
-  setpointTemp3: number;
-
-  @Column()
-  returnTemp3: number;
-
-  @Column()
-  dischargeTemp3: number;
-
-  @Column()
-  afaxMode: string;
-
-  @Column()
-  coilTemp: number;
-
-  @Column()
-  etvPosition: number;
-
-  @Column()
-  dischargePressure: number;
-
-  @Column()
-  suctionPressure: number;
-
-  @Column()
-  remoteProbeTemp: number;
-
-  @Column()
-  remoteProbe2Temp: number;
-
-  @Column()
-  remoteProbe3Temp: number;
-
-  @Column()
-  remoteProbe4Temp: number;
-
-  @Column()
-  remoteProbe5Temp: number;
-
-  @Column()
-  remoteProbe6Temp: number;
-
-  @Column()
-  remoteProbe7Temp: number;
-
-  @Column()
-  remoteProbe8Temp: number;
-
-  @Column()
-  remoteProbe9Temp: number;
-
-  @Column()
-  remoteProbe10Temp: number;
-
-  @Column()
-  remoteProbe11Temp: number;
-
-  @Column()
-  remoteProbe12Temp: number;
-
-  @Column()
-  humidity: number;
-
-  @Column()
-  eventSeverity: string;
-
-  @Column()
-  assetBatteryVoltage: number;
-
-  @Column()
-  calculatedEngineMinutes: number;
-  @Column({ nullable: true })
-  contentType: string;
-
-  @Column({ nullable: true })
-  controllerOn: string;
-
-  @Column({ nullable: true })
-  engineSize: string;
-
-  @Column({ nullable: true })
-  interfaceType: string;
-
-  @Column({ nullable: true })
-  reeferMicro: string;
-
-  @Column({ nullable: true })
-  profileList: string;
-
-  @Column({ nullable: true })
-  reeferOperatingStatus: string;
-
-  @Column({ nullable: true })
-  reeferOperational: string;
-
-  @Column({ nullable: true })
-  remoteSwitchOpen: string;
-
-  @Column({ nullable: true })
-  remoteSwitch2Open: string;
-
-  @Column({ nullable: true })
-  mileageDesc: string;
-
-  @Column({ type: 'varchar', nullable: true })
-  cargoStatus: string | null;
+  //
+  // @Column()
+  // ftaStatusText: string;
+  //
+  // @Column()
+  // ftaStatus2Text: string;
+  //
+  // @Column()
+  // ftaStatus3Text: string;
+  //
+  // @Column()
+  // fsmaDocCount: number;
+  //
+  // @Column()
+  // fuelAlertText: string;
+  //
+  // @Column()
+  // microComm: string;
+  //
+  // @Column()
+  // activeAlarms: string;
+  //
+  // @Column()
+  // standByHours: number;
+  //
+  // @Column()
+  // ambientTemp: number;
+  //
+  // @Column()
+  // reeferPowerDesc: string;
+  //
+  // @Column()
+  // setpointTemp: number;
+  //
+  // @Column()
+  // returnTemp: number;
+  //
+  // @Column()
+  // dischargeTemp: number;
+  //
+  // @Column()
+  // reeferPower2Desc: string;
+  //
+  // @Column()
+  // setpointTemp2: number;
+  //
+  // @Column()
+  // returnTemp2: number;
+  //
+  // @Column()
+  // dischargeTemp2: number;
+  //
+  // @Column()
+  // reeferPower3Desc: string;
+  //
+  // @Column()
+  // setpointTemp3: number;
+  //
+  // @Column()
+  // returnTemp3: number;
+  //
+  // @Column()
+  // dischargeTemp3: number;
+  //
+  // @Column()
+  // afaxMode: string;
+  //
+  // @Column()
+  // coilTemp: number;
+  //
+  // @Column()
+  // etvPosition: number;
+  //
+  // @Column()
+  // dischargePressure: number;
+  //
+  // @Column()
+  // suctionPressure: number;
+  //
+  // @Column()
+  // remoteProbeTemp: number;
+  //
+  // @Column()
+  // remoteProbe2Temp: number;
+  //
+  // @Column()
+  // remoteProbe3Temp: number;
+  //
+  // @Column()
+  // remoteProbe4Temp: number;
+  //
+  // @Column()
+  // remoteProbe5Temp: number;
+  //
+  // @Column()
+  // remoteProbe6Temp: number;
+  //
+  // @Column()
+  // remoteProbe7Temp: number;
+  //
+  // @Column()
+  // remoteProbe8Temp: number;
+  //
+  // @Column()
+  // remoteProbe9Temp: number;
+  //
+  // @Column()
+  // remoteProbe10Temp: number;
+  //
+  // @Column()
+  // remoteProbe11Temp: number;
+  //
+  // @Column()
+  // remoteProbe12Temp: number;
+  //
+  // @Column()
+  // humidity: number;
+  //
+  // @Column()
+  // eventSeverity: string;
+  //
+  // @Column()
+  // assetBatteryVoltage: number;
+  //
+  // @Column()
+  // calculatedEngineMinutes: number;
+  // @Column({ nullable: true })
+  // contentType: string;
+  //
+  // @Column({ nullable: true })
+  // controllerOn: string;
+  //
+  // @Column({ nullable: true })
+  // engineSize: string;
+  //
+  // @Column({ nullable: true })
+  // interfaceType: string;
+  //
+  // @Column({ nullable: true })
+  // reeferMicro: string;
+  //
+  // @Column({ nullable: true })
+  // profileList: string;
+  //
+  // @Column({ nullable: true })
+  // reeferOperatingStatus: string;
+  //
+  // @Column({ nullable: true })
+  // reeferOperational: string;
+  //
+  // @Column({ nullable: true })
+  // remoteSwitchOpen: string;
+  //
+  // @Column({ nullable: true })
+  // remoteSwitch2Open: string;
+  //
+  // @Column({ nullable: true })
+  // mileageDesc: string;
+  //
+  // @Column({ type: 'varchar', nullable: true })
+  // cargoStatus: string | null;
 
   @Column()
   messageMode: string;
-
-  @Column({ nullable: true })
-  tractorId: string;
-
-  @Column({ nullable: true })
-  clmStatus: string;
-
-  @Column({ nullable: true })
-  fuelDiff: string;
-
-  @Column({ nullable: true })
-  fuelSensorType: string;
-
-  @Column({ nullable: true })
-  microSN: string;
-
-  @Column({ nullable: true })
-  humidityStatus: string;
-
-  @Column({ nullable: true })
-  workOrder: string;
-
-  @Column({ nullable: true })
-  fuelFlowError: string;
-
-  @Column({ nullable: true })
-  pretripAlertText: string;
-
-  @Column({ nullable: true })
-  commandStatus: string;
-
-  @Column({ nullable: true })
-  disparityAlertText: string;
-
-  @Column({ nullable: true })
-  dwellStartTime: string;
-
-  @Column({ nullable: true })
-  dwellEndTime: string;
-
-  @Column({ nullable: true })
-  detentionQualifiedTime: string;
-
-  @Column({ nullable: true })
-  impactAlertText: string;
-
-  @Column({ nullable: true })
-  lockDownText: string;
-
-  @Column({ nullable: true })
-  carbAlertText: string;
-
-  @Column({ nullable: true })
-  panicAlertText: string;
-
-  @Column({ nullable: true })
-  tempAlert: string;
-
-  @Column({ nullable: true })
-  temp2Alert: string;
-
-  @Column({ nullable: true })
-  temp3Alert: string;
-
-  @Column({ nullable: true })
-  fuelStatus: string;
-
-  @Column({ nullable: true })
-  detentionDuration: string;
-
-  @Column({ nullable: true })
-  doorSensorData: string;
-
-  @Column({ nullable: true })
-  cargoSensorData: string;
-
-  @Column({ nullable: true })
-  voltageSensorData: string;
-
-  @Column({ nullable: true })
-  temperatureSensorData: string;
-
-  @Column({ nullable: true })
-  pressureSensorData: string;
-
-  @Column({ nullable: true })
-  fuelSensorData: string;
-
-  @Column({ nullable: true })
-  humiditySensorData: string;
-
-  @Column({ nullable: true })
-  distanceSensorData: string;
-
-  @Column({ nullable: true })
-  counterSensorData: string;
-
-  @Column({ nullable: true })
-  otherSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // tractorId: string;
+  //
+  // @Column({ nullable: true })
+  // clmStatus: string;
+  //
+  // @Column({ nullable: true })
+  // fuelDiff: string;
+  //
+  // @Column({ nullable: true })
+  // fuelSensorType: string;
+  //
+  // @Column({ nullable: true })
+  // microSN: string;
+  //
+  // @Column({ nullable: true })
+  // humidityStatus: string;
+  //
+  // @Column({ nullable: true })
+  // workOrder: string;
+  //
+  // @Column({ nullable: true })
+  // fuelFlowError: string;
+  //
+  // @Column({ nullable: true })
+  // pretripAlertText: string;
+  //
+  // @Column({ nullable: true })
+  // commandStatus: string;
+  //
+  // @Column({ nullable: true })
+  // disparityAlertText: string;
+  //
+  // @Column({ nullable: true })
+  // dwellStartTime: string;
+  //
+  // @Column({ nullable: true })
+  // dwellEndTime: string;
+  //
+  // @Column({ nullable: true })
+  // detentionQualifiedTime: string;
+  //
+  // @Column({ nullable: true })
+  // impactAlertText: string;
+  //
+  // @Column({ nullable: true })
+  // lockDownText: string;
+  //
+  // @Column({ nullable: true })
+  // carbAlertText: string;
+  //
+  // @Column({ nullable: true })
+  // panicAlertText: string;
+  //
+  // @Column({ nullable: true })
+  // tempAlert: string;
+  //
+  // @Column({ nullable: true })
+  // temp2Alert: string;
+  //
+  // @Column({ nullable: true })
+  // temp3Alert: string;
+  //
+  // @Column({ nullable: true })
+  // fuelStatus: string;
+  //
+  // @Column({ nullable: true })
+  // detentionDuration: string;
+  //
+  // @Column({ nullable: true })
+  // doorSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // cargoSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // voltageSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // temperatureSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // pressureSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // fuelSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // humiditySensorData: string;
+  //
+  // @Column({ nullable: true })
+  // distanceSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // counterSensorData: string;
+  //
+  // @Column({ nullable: true })
+  // otherSensorData: string;
 }
 
 @Entity('orbGenericSensor')

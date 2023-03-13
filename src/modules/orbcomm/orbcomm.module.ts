@@ -3,7 +3,7 @@ import { OrbScheduler } from './service/orbcommScheduler.service';
 import { OrbcommController } from './orbcomm.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
-  OrbAsset,
+  OrbAssetStatusMng,
   OrbAssetStatus,
   OrbGenericSensor,
   OrbImpactStatus,
@@ -24,7 +24,7 @@ import { orbAuthToken } from './entities/orbAuth.entity';
   //AxiosModule = httpmodule
   imports: [
     TypeOrmModule.forFeature([
-      OrbAsset,
+      OrbAssetStatusMng,
       OrbAssetStatus,
       OrbPositionStatus,
       OrbReeferStatus,

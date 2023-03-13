@@ -23,12 +23,19 @@ export class OrbcommController {
     private readonly orbComApi: OrbComApi,
   ) {}
   /*TestCode*/
-  //todo ReQuestExample!!!!!!
   @Post('test')
   @ApiBody({ type: Object })
   async test(@Body() test: any) {
-    console.log(test);
-    return await this.orbDataApi.testApi(test);
+    const resultDate = await this.orbDataApi.testApi(test);
+    console.log(resultDate);
+    return resultDate;
+  }
+  @Post('callAsset')
+  @ApiBody({ type: Object })
+  async getAssetStatus(@Body() bodyData: any) {
+    const resultDate = await this.orbDataApi.callAssetStatus(bodyData);
+    console.log(resultDate);
+    return resultDate;
   }
   /*Authentication API*/
   @ApiTags('Authentication API')
